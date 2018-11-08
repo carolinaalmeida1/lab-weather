@@ -3,7 +3,6 @@ const sass = require('gulp-sass');
 const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
-const sync = require("browser-sync").create();
 
 gulp.task('compile-sass', function(){
   return gulp.src('scss/*.scss')
@@ -12,7 +11,7 @@ gulp.task('compile-sass', function(){
   .pipe(sass())
   .pipe(cleanCSS())
   .pipe(sourcemaps.write())
-  .pipe(gulp.dest("docs/css"));
+  .pipe(gulp.dest("public/css"));
 });
 
 gulp.task('watch', function () {
