@@ -1,29 +1,22 @@
 const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-
 $(document).ready(() => {
-  $("#current-weather").on("click", () => {
-    currentWeatherInfo();
-    weatherInfo5Days()
-  });
-  // $("#five-days").on("click", () => weatherInfo5Days());
+    function initMap(lat, lng) {
+      var currentLocation = { lat: lat, lng: lng };
+      var map = new google.maps.Map(
+        document.getElementById('map'), { zoom: 16, center: currentLocation });
+      var marker = new google.maps.Marker({ position: currentLocation, map: map });
+    }
 
-  function initMap(lat, lng) {
-    var currentLocation = { lat: lat, lng: lng };
-    var map = new google.maps.Map(
-      document.getElementById('map'), { zoom: 16, center: currentLocation });
-    var marker = new google.maps.Marker({ position: currentLocation, map: map });
-  }
+    window.navigator.geolocation.getCurrentPosition(function (position) {
+      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
+        .then(response => response.json())
+        .then(data => {
+          const date = new Date();
+          const hourDiaAtual = date.getHours();
+          const dayDiaAtual = date.getDate();
+          const month = MONTHS[date.getMonth()];
 
-  window.navigator.geolocation.getCurrentPosition(function (position) {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
-      .then(response => response.json())
-      .then(data => {
-        const date = new Date();
-        const hourDiaAtual = date.getHours();
-        const dayDiaAtual = date.getDate();
-        const month = MONTHS[date.getMonth()];
-
-        $(".info").append(`
+          $(".info").append(`
         <div>
           <h1>${dayDiaAtual} de ${month}</h1>
           <i>${data.name} - ${data.sys.country}</i>
@@ -35,15 +28,21 @@ $(document).ready(() => {
           <button id="more-details">VER MAIS</button>
         </div>
         `);
-        $("#more-details").one("click", () => weatherDetails(data));
-        initMap(position.coords.latitude, position.coords.longitude);
-      })
+          $("#more-details").one("click", () => weatherDetails(data));
+          initMap(position.coords.latitude, position.coords.longitude);
+        })
 
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
-      .then(response => response.json())
-      .then(data => { createAll(data.list) }
-      )
-  })
+      fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
+        .then(response => response.json())
+        .then(data => { createAll(data.list) }
+        )
+    })
+
+  $("#current-weather").on("click", (e) => {
+    e.preventDefault();
+    currentWeatherInfo();
+    weatherInfo5Days();
+  });
 });
 
 function currentWeatherInfo() {
