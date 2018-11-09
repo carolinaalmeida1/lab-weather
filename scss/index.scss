@@ -49,7 +49,7 @@ nav{
 .container {
   height: 100vh;
   overflow: scroll;
-  padding: 40px;
+  padding: 40px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -70,13 +70,14 @@ nav{
 .sidebar {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
-  width: 90%;
+  width: 100%;
 }
 
 .info {
-  padding: 20px 0;
+  padding: 40px 0;
+  background-color: #1F4371;
   text-align: center;
+  color: white;
   line-height: 1.8;
   h1, h2, h3 {
     font-family: $primary-font;
@@ -93,5 +94,7 @@ nav{
 }
 
 .five-days-weather {
+  // display: flex;
+  // flex-wrap: wrap;
   background-color: yellow;
 }

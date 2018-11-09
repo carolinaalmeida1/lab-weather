@@ -1,22 +1,22 @@
 const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 $(document).ready(() => {
-    function initMap(lat, lng) {
-      var currentLocation = { lat: lat, lng: lng };
-      var map = new google.maps.Map(
-        document.getElementById('map'), { zoom: 16, center: currentLocation });
-      var marker = new google.maps.Marker({ position: currentLocation, map: map });
-    }
+  function initMap(lat, lng) {
+    var currentLocation = { lat: lat, lng: lng };
+    var map = new google.maps.Map(
+      document.getElementById('map'), { zoom: 16, center: currentLocation });
+    var marker = new google.maps.Marker({ position: currentLocation, map: map });
+  }
 
-    window.navigator.geolocation.getCurrentPosition(function (position) {
-      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
-        .then(response => response.json())
-        .then(data => {
-          const date = new Date();
-          const hourDiaAtual = date.getHours();
-          const dayDiaAtual = date.getDate();
-          const month = MONTHS[date.getMonth()];
+  window.navigator.geolocation.getCurrentPosition(function (position) {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
+      .then(response => response.json())
+      .then(data => {
+        const date = new Date();
+        const hourDiaAtual = date.getHours();
+        const dayDiaAtual = date.getDate();
+        const month = MONTHS[date.getMonth()];
 
-          $(".info").append(`
+        $(".info").append(`
         <div>
           <h1>${dayDiaAtual} de ${month}</h1>
           <i>${data.name} - ${data.sys.country}</i>
@@ -28,15 +28,15 @@ $(document).ready(() => {
           <button id="more-details">VER MAIS</button>
         </div>
         `);
-          $("#more-details").one("click", () => weatherDetails(data));
-          initMap(position.coords.latitude, position.coords.longitude);
-        })
+        $("#more-details").one("click", () => weatherDetails(data));
+        initMap(position.coords.latitude, position.coords.longitude);
+      })
 
-      fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
-        .then(response => response.json())
-        .then(data => { createAll(data.list) }
-        )
-    })
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
+      .then(response => response.json())
+      .then(data => { createAll(data.list) }
+      )
+  })
 
   $("#current-weather").on("click", (e) => {
     e.preventDefault();
@@ -94,54 +94,56 @@ function weatherInfo5Days() {
   }
 }
 
+let index = 1;
+
 function createAll(weatherListData) {
+  let arrayPorDias = {};
   weatherListData.reduce(function (diaAnterior, diaAtual, index) {
 
     const dateDiaAtual = new Date(diaAtual.dt_txt);
-    const hourDiaAtual = dateDiaAtual.getHours();
     const dayDiaAtual = dateDiaAtual.getDate();
-    const monthDiaAtual = dateDiaAtual.getMonth();
     const tempMinDiaAtual = Math.round(diaAtual.main.temp_min);
     const tempMaxDiaAtual = Math.round(diaAtual.main.temp_max);
 
     const dateDiaAnterior = new Date(diaAnterior.dt_txt);
-    const hourDiaAnterior = dateDiaAnterior.getHours();
     const dayDiaAnterior = dateDiaAnterior.getDate();
-    const monthDiaAnterior = dateDiaAnterior.getMonth();
     const tempMinDiaAnterior = Math.round(diaAnterior.main.temp_min);
     const tempMaxDiaAnterior = Math.round(diaAnterior.main.temp_max);
 
     if (index == 1) {
-      $(".five-days-weather").append(`
-        <h1>${dayDiaAnterior} de ${MONTHS[monthDiaAnterior]}</h1>
-        <li>
-          <span>${hourDiaAnterior}:00</span>
-          <b>${tempMinDiaAnterior}°C MIN</b>
-          <b>${tempMaxDiaAnterior}°C MAX</b>
-        </li>
-      `);
+      arrayPorDias[dayDiaAtual] = {
+        min: tempMinDiaAnterior, max: tempMaxDiaAnterior
+      };
     }
-
     if (dayDiaAtual === dayDiaAnterior) {
-      $(".five-days-weather").append(`
-        <li>
-          <span>${hourDiaAtual}:00</span>
-          <b>${tempMinDiaAtual}°C MIN</b>
-          <b>${tempMaxDiaAtual}°C MAX</b>
-        </li>
-      `);
+      if (arrayPorDias[dayDiaAtual].min > tempMinDiaAtual) {
+        arrayPorDias[dayDiaAtual].min = tempMinDiaAtual;
+      }
+      if (arrayPorDias[dayDiaAtual].max < tempMaxDiaAtual) {
+        arrayPorDias[dayDiaAtual].max = tempMaxDiaAtual;
+      }
     } else {
-      $(".five-days-weather").append(`
-        <h1>${dayDiaAtual} de ${MONTHS[monthDiaAtual]}</h1>
-        <li>
-          <span>${hourDiaAtual}:00</span>
-          <b>${tempMinDiaAtual}°C MIN</b>
-          <b>${tempMaxDiaAtual}°C MAX</b>
-        </li>
-      `);
+      arrayPorDias[dayDiaAtual] = {
+        min: dayDiaAtual, max: dayDiaAtual
+      };
     }
     return diaAtual;
   });
+  console.log(arrayPorDias)
+  for (let i in arrayPorDias) {
+    let date = new Date();
+
+    $(".five-days-weather").append(`
+    <div class="five-days-item" data-day="${index}">
+      <h1>${i} de ${MONTHS[date.getMonth()]}</h1>
+      <div>
+        <h3>${arrayPorDias[i].min}°C MIN</h3>
+        <h3>${arrayPorDias[i].max}°C MAX</h3>
+      </div>
+    </div>
+  `);
+    index++;
+  }
 }
 
 function weatherDetails(data) {
