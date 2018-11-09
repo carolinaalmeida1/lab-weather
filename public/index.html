@@ -10,8 +10,15 @@
 </head>
 
 <body>
+  <section class="preview">
+    <img src="images/Lab-Weather_v2.png">
+  </section>
+
+  <main>
   <nav>
-    <a href="#"><img src="logo.png" alt="logo"></a>
+    <a href="#">
+      <img src="images/logo.png" alt="logo">
+    </a>
     <form>
       <input type="text" id="search-input" placeholder="Pesquisar por nome da cidade ou estado.">
       <button id="current-weather">CLIMA ATUAL</button>
@@ -23,12 +30,31 @@
       <div class="info"></div>
       <div class="five-days-weather"></div>
     </div>
-  </section>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTKTodY-5Qq8iwO_8Bq4ogm7FlvLZ2-4&callback=initMap"></script>
-  <script src="script/index.js"></script>
+    <section class="content">
+      <nav>
+        <a href="#">LOGO</a>
+        <form>
+          <input type="text" id="search-input" placeholder="Pesquisar por nome da cidade ou estado.">
+          <button id="current-weather">CLIMA ATUAL</button>
+        </form>
+      </nav>
+      <div class="" id="map"></div>
+      <section class="container">
+        <div class="sidebar">
+          <div class="info"></div>
+          <div class="five-days-weather"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTKTodY-5Qq8iwO_8Bq4ogm7FlvLZ2-4&callback=initMap"></script>
+    <script src="script/index.js"></script>
+    <script src="script/splash.js"></script>
 </body>
 
 </html>
