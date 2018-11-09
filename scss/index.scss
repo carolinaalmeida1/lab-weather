@@ -75,7 +75,7 @@ nav{
 
 .info {
   padding: 40px 0;
-  background-color: #1F4371;
+  background-color: #3D5571  ;
   text-align: center;
   color: white;
   line-height: 1.8;
@@ -94,7 +94,43 @@ nav{
 }
 
 .five-days-weather {
-  // display: flex;
-  // flex-wrap: wrap;
-  background-color: yellow;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+[data-day="1"] {
+  color: #fff;
+  background-color: #1F4371;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="2"] {
+  color: #fff;
+  background-color: #2962A9;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="3"] {
+  color: #fff;
+  background-color: #347BD5;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="4"] {
+  color: #fff;
+  background-color: #609AE1;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="5"] {
+  color: #fff;
+  background-color: #76A7E3;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
 }
