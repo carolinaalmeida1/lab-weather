@@ -148,10 +148,10 @@ function createAll(weatherListData) {
 
 function weatherDetails(data) {
   $(".info").append(`
-        <h2>Probabilidade de chuva: ${data.clouds.all}%</h2>
-        <h2>Umidade: ${data.main.humidity}%</h2>
-        <h2>Pressão: ${data.main.pressure} mb</h2>
-        <h2>Vento: ${Math.round(data.wind.speed * 3.66)} km/h</h2>       
+        <h3>Probabilidade de chuva: ${data.clouds.all}%</h3>
+        <h3>Umidade: ${data.main.humidity}%</h3>
+        <h3>Pressão: ${data.main.pressure} mb</h3>
+        <h3>Vento: ${Math.round(data.wind.speed * 3.66)} km/h</h3>       
       `);
 }
 
