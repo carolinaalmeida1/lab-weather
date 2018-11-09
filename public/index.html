@@ -10,19 +10,28 @@
 </head>
 
 <body>
-
+  <nav>
+    <a href="#">LOGO</a>
+    <form>
+      <input type="text" id="search-input" placeholder="Pesquisar por nome da cidade ou estado.">
+      <button id="current-weather">CLIMA ATUAL</button>
+    </form>
+  </nav>
   <div class="" id="map"></div>
-  <input type="text" id="search-input" placeholder="Pesquisar por nome da cidade, CEP ou estado.">
-  <button id="current-weather">CLIMA ATUAL</button>
-  <button id="five-days">5 DIAS</button>
+  <section class="container">
+    <div class="sidebar">
+      <!-- <div>
 
-  <div class="info"></div>
+        <button id="five-days">5 DIAS</button>
+      </div> -->
+      <div class="info"></div>
+      <div class="five-days-weather"></div>
+    </div>
+  </section>
 
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcq48tyAtPgwmfJKoA0DgYKmWDorSluKc&callback=initMap"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvTKTodY-5Qq8iwO_8Bq4ogm7FlvLZ2-4&callback=initMap"></script>
   <script src="script/index.js"></script>
 </body>
 

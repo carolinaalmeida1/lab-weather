@@ -1,8 +1,11 @@
 const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
 $(document).ready(() => {
-  $("#current-weather").on("click", () => currentWeatherInfo());
-  $("#five-days").on("click", () => weatherInfo5Days());
+  $("#current-weather").on("click", () => {
+    currentWeatherInfo();
+    weatherInfo5Days()
+  });
+  // $("#five-days").on("click", () => weatherInfo5Days());
 
   function initMap(lat, lng) {
     var currentLocation = { lat: lat, lng: lng };
@@ -35,7 +38,12 @@ $(document).ready(() => {
         $("#more-details").one("click", () => weatherDetails(data));
         initMap(position.coords.latitude, position.coords.longitude);
       })
-  });
+
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&APPID=e3747c4f5aa0b546e718e6ca89ace477`)
+      .then(response => response.json())
+      .then(data => { createAll(data.list) }
+      )
+  })
 });
 
 function currentWeatherInfo() {
@@ -76,7 +84,7 @@ function currentWeatherInfo() {
 }
 
 function weatherInfo5Days() {
-  $(".info").html("");
+  $(".five-days-weather").html("");
   const location = $("#search-input").val();
 
   if (/[aA-zZ]/g.test(location)) {
@@ -105,7 +113,7 @@ function createAll(weatherListData) {
     const tempMaxDiaAnterior = Math.round(diaAnterior.main.temp_max);
 
     if (index == 1) {
-      $(".info").append(`
+      $(".five-days-weather").append(`
         <h1>${dayDiaAnterior} de ${MONTHS[monthDiaAnterior]}</h1>
         <li>
           <span>${hourDiaAnterior}:00</span>
@@ -116,7 +124,7 @@ function createAll(weatherListData) {
     }
 
     if (dayDiaAtual === dayDiaAnterior) {
-      $(".info").append(`
+      $(".five-days-weather").append(`
         <li>
           <span>${hourDiaAtual}:00</span>
           <b>${tempMinDiaAtual}°C MIN</b>
@@ -124,8 +132,8 @@ function createAll(weatherListData) {
         </li>
       `);
     } else {
-      $(".info").append(`
-        <h1>${dayDiaAtual} of ${MONTHS[monthDiaAtual]}</h1>
+      $(".five-days-weather").append(`
+        <h1>${dayDiaAtual} de ${MONTHS[monthDiaAtual]}</h1>
         <li>
           <span>${hourDiaAtual}:00</span>
           <b>${tempMinDiaAtual}°C MIN</b>
