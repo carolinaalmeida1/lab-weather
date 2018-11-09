@@ -1,8 +1,8 @@
 const MONTHS = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 $(document).ready(() => {
 
-  $(".preview").delay("3000").slideUp("slow");
-  $("main").delay("3000").fadeIn("slow");
+  // $(".preview").delay("3000").slideUp("slow");
+  // $("main").delay("3000").fadeIn("slow").css("display","flex");
 
   function initMap(lat, lng) {
     var currentLocation = { lat: lat, lng: lng };
@@ -98,8 +98,6 @@ function weatherInfo5Days() {
   }
 }
 
-let index = 1;
-
 function createAll(weatherListData) {
   let arrayPorDias = {};
   weatherListData.reduce(function (diaAnterior, diaAtual, index) {
@@ -133,12 +131,11 @@ function createAll(weatherListData) {
     }
     return diaAtual;
   });
-  console.log(arrayPorDias)
   for (let i in arrayPorDias) {
     let date = new Date();
 
     $(".five-days-weather").append(`
-    <div class="five-days-item" data-day="${index}">
+    <div class="five-days-item">
       <h1>${i} de ${MONTHS[date.getMonth()]}</h1>
       <div>
         <h3>${arrayPorDias[i].min}°C MIN</h3>
@@ -146,7 +143,6 @@ function createAll(weatherListData) {
       </div>
     </div>
   `);
-    index++;
   }
 }
 

@@ -11,35 +11,32 @@ body {
   flex-direction: row;
 }
 
-.preview {
-  height: 100vh;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-main {
-  display: none;
-}
-
 nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   background-color: #fff;
-  padding: 10px 40px;
+  padding: 10px 80px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
   form {
     background-color:#DDD7C9;
-    display: inline-block;
     border-radius: 25px;
     padding: 0 20px;
-    width: 35%;
+    width: 28%;
+    display: flex;
+    justify-content: space-between;
+    button{
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      i{
+        font-size: 25px;
+      }
+    }
   }
   input {
     background-color: transparent;
@@ -61,7 +58,7 @@ nav{
 .container {
   height: 100vh;
   overflow: scroll;
-  padding: 40px 0;
+  padding-top: 40px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -80,11 +77,10 @@ nav{
 }
 
 .sidebar {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   width: 100%;
 }
-
 .info {
   padding: 40px 0;
   background-color: #3D5571  ;
@@ -106,43 +102,17 @@ nav{
 }
 
 .five-days-weather {
+  height: 268px;
   display: flex;
   flex-wrap: wrap;
   text-align: center;
 }
 
-[data-day="1"] {
-  color: #fff;
-  background-color: #1F4371;
+.five-days-item{
+  padding: 50px 0;
+  border-right: 1px solid #ffffff;
+  background-color: #e4e4e4;
   width: 20%;
-  height: 30vh;
-  padding-top: 10px;
-}
-[data-day="2"] {
-  color: #fff;
-  background-color: #2962A9;
-  width: 20%;
-  height: 30vh;
-  padding-top: 10px;
-}
-[data-day="3"] {
-  color: #fff;
-  background-color: #347BD5;
-  width: 20%;
-  height: 30vh;
-  padding-top: 10px;
-}
-[data-day="4"] {
-  color: #fff;
-  background-color: #609AE1;
-  width: 20%;
-  height: 30vh;
-  padding-top: 10px;
-}
-[data-day="5"] {
-  color: #fff;
-  background-color: #76A7E3;
-  width: 20%;
-  height: 30vh;
-  padding-top: 10px;
+  font-family: $primary-font;
+  line-height: 2;
 }
