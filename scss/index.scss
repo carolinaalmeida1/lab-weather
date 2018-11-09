@@ -11,6 +11,18 @@ body {
   flex-direction: row;
 }
 
+.preview {
+  height: 100vh;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: none;
+}
+
 nav{
   display: flex;
   justify-content: space-between;
@@ -23,7 +35,7 @@ nav{
   left: 0;
   z-index: 999;
   form {
-    background-color: rgba(0, 0, 0, 0.255);
+    background-color:#DDD7C9;
     display: inline-block;
     border-radius: 25px;
     padding: 0 20px;
@@ -43,7 +55,7 @@ nav{
   width: 100%;
   height: 100vh;
   margin: 0;
-  background-color: grey;
+  background-color: #DDD7C9;
 }
 
 .container {
@@ -55,14 +67,14 @@ nav{
   flex-direction: column;
   align-items: center;  
   button {
-    background-color: $primary-color;
+    background-color: #347BD5 ;
     color: #fff;
     border-radius: 25px;
     border: 0;
     padding: 10px 20px;
     &:hover {
       cursor: pointer;
-      background-color: $secondary-color;
+      background-color: black;
     }
   }
 }
@@ -75,7 +87,7 @@ nav{
 
 .info {
   padding: 40px 0;
-  background-color: #1F4371;
+  background-color: #3D5571  ;
   text-align: center;
   color: white;
   line-height: 1.8;
@@ -94,7 +106,43 @@ nav{
 }
 
 .five-days-weather {
-  // display: flex;
-  // flex-wrap: wrap;
-  background-color: yellow;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+[data-day="1"] {
+  color: #fff;
+  background-color: #1F4371;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="2"] {
+  color: #fff;
+  background-color: #2962A9;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="3"] {
+  color: #fff;
+  background-color: #347BD5;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="4"] {
+  color: #fff;
+  background-color: #609AE1;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
+}
+[data-day="5"] {
+  color: #fff;
+  background-color: #76A7E3;
+  width: 20%;
+  height: 30vh;
+  padding-top: 10px;
 }
